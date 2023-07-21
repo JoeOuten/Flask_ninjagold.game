@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ninja Gold</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class= "container">
+        <h1>Ninja Money</h1>
+        <h3>Your Gold: {{session["YourGold"]}} </h3>
+        <div class ="boxes">
+            <h2>Farm</h2>
+            <p>earns 10-20 gold</p>
+            <form action="/process_money" method="post">
+                <input type="hidden" name="process" value="farm">
+                <input type="submit" name="submit" value="Find Gold">
+            </form>
+        </div>
+        <div class ="boxes">
+            <h2>Cave</h2>
+            <p>earns 5-10 gold</p>
+            <form action="/process_money" method="post">
+                <input type="hidden" name="process" value="cave">
+                <input type="submit" name="submit" value="Find Gold">
+            </form>
+        </div>
+        <div class ="boxes">
+            <h2>House</h2>
+            <p>earns 2-5 gold</p>
+            <form action="/process_money" method="post">
+                <input type="hidden" name="process" value="house">
+                <input type="submit" name="submit" value="Find Gold">
+            </form>
+        </div>
+        <div class ="boxes">
+            <h2>Casino</h2>
+            <p>earns/takes 0-50 gold</p>
+            <form action="/process_money" method="post">
+                <input type="hidden" name="process" value="casino">
+                <input type="submit" name="submit" value="Find Gold">
+            </form>
+        </div>
+        <h3>Activities:</h3>
+        <div class="ActivityBoard">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if "better luck next time" in message %}
+                        <p style="color: red">{{message}}</p>
+                    {% else %}
+                        <p style="color: green">{{message}}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <a href="/reset"><button><b>Start Over</b></button></a>
+    </div>
+</body>
+</html>
